@@ -1,2 +1,4 @@
-presidio_analyzer
-presidio_anonymizer
+presidio_analyzer==2.2.33
+presidio_anonymizer==2.2.33
+spacy==3.5.3
+en_core_web_lg==3.5.0
