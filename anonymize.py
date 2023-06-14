@@ -1,11 +1,14 @@
 from presidio_anonymizer import AnonymizerEngine
 from presidio_analyzer import AnalyzerEngine
 from presidio_anonymizer.entities import OperatorConfig
+from utils import pdf_to_txt
 
+#convert pdf to txt
+txt_file=pdf_to_txt("my_info","text")
 
 #read txt file
 text=''
-with open("text.txt",'r') as file:
+with open(txt_file+".txt",'r') as file:
     text=file.read()
 
 # 1/ Analyzer 
