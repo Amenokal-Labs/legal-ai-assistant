@@ -4,7 +4,7 @@ from presidio_anonymizer.entities import OperatorConfig
 from utils import pdf_to_txt
 
 #read txt file
-text=pdf_to_txt("pdf")
+text=pdf_to_txt("example.pdf")
 
 # 1/ Analyzer 
 analyzer = AnalyzerEngine()
