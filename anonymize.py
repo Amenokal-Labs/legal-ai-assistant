@@ -36,3 +36,4 @@ result = engine.anonymize(
 #storing the results
 with open('anonymized_text.txt','w')as file:
     file.write(result.text)
+    
