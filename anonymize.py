@@ -1,17 +1,14 @@
 from presidio_anonymizer import AnonymizerEngine
 from presidio_analyzer import AnalyzerEngine
 from presidio_anonymizer.entities import OperatorConfig
-
+from utils import pdf_to_txt
 
 #read txt file
-text=''
-with open("text.txt",'r') as file:
-    text=file.read()
+text=pdf_to_txt("example.pdf")
 
 # 1/ Analyzer 
 analyzer = AnalyzerEngine()
 analyzer_results = analyzer.analyze(text=text, language="en")
-
 
 # 2/Anonymizer
 
@@ -36,7 +33,7 @@ result = engine.anonymize(
     text=text, analyzer_results=analyzer_results,operators=operators
 )
 
-
 #storing the results
 with open('anonymized_text.txt','w')as file:
     file.write(result.text)
+    
