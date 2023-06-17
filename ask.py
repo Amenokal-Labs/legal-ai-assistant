@@ -2,13 +2,10 @@ import os
 import openai
 from dotenv import load_dotenv
 
-
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def main():
-
-
 
     messages=[
                 {"role": "system", "content": "You are a leagal assistant"},
@@ -28,4 +25,5 @@ def main():
         print(f"ChatGPT: {reply}")
         messages.append({"role": "assistant", "content": reply})
 
-main()        
+if __name__ == "__main__":
+    main()        
