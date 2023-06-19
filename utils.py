@@ -1,7 +1,14 @@
-from PyPDF2 import PdfReader
+import pdfplumber
 
+def read_pdf_file(filename:str):
+    text=''
+    with pdfplumber.open(filename) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text()
+    return text
 
-def pdf_to_txt(filename:str):
-    reader=PdfReader(filename)
-    text = "\n".join(page.extract_text() for page in reader.pages)
+def read_txt_file(filename:str):
+    text=''
+    with open(filename,'r')as file:
+        text+=file.read()
     return text
