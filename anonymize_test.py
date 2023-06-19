@@ -15,6 +15,7 @@ def test_anonymize_phone():
 
 def test_anonymize_email():
     text=txt_to_string('anonymized_text.txt')
+    #doesn't pass the test since in .com the last character "m" is contained in the anonymized file here in (text) just like this "<anonymized>m"
     assert "louisbond@example.com" not in text and "louisbond@example.com" in pdf_to_txt("test_example.pdf")
 
 
