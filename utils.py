@@ -1,13 +1,13 @@
-from PyPDF2 import PdfReader
+import pdfplumber
 
-def pdf_to_txt(filename:str):
-    reader=PdfReader(filename)
+def read_pdf_file(filename:str):
     text=''
-    for page in reader.pages:
-        text += str(page.extract_text()) 
+    with pdfplumber.open(filename) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text()
     return text
 
-def txt_to_string(filename:str):
+def read_txt_file(filename:str):
     text=''
     with open(filename,'r')as file:
         text+=file.read()

@@ -1,24 +1,39 @@
+import pytest
 from anonymize import anonymize
-from utils import pdf_to_txt, txt_to_string
+from utils import read_pdf_file, read_txt_file
+
+# Constants
+TEST_PDF_PATH = "test_example.pdf"
+ANONYMIZED_TEXT_PATH = "anonymized_text.txt"
+
+# Fixtures
+@pytest.fixture(scope="module")
+def pdf_file():
+    yield read_pdf_file(TEST_PDF_PATH)
 
 
-
-def test_anonymize_name():
-    anonymize("test_example.pdf")
-    text=txt_to_string('anonymized_text.txt')
-    assert "John Doe" not in text and "John Doe" in pdf_to_txt("test_example.pdf")
-
-
-def test_anonymize_phone():
-    text=txt_to_string('anonymized_text.txt')
-    assert "07816093423" not in text and "07816093423" in pdf_to_txt("test_example.pdf")
-
-def test_anonymize_email():
-    text=txt_to_string('anonymized_text.txt')
-    #doesn't pass the test since in .com the last character "m" is contained in the anonymized file here in (text) just like this "<anonymized>m"
-    assert "louisbond@example.com" not in text and "louisbond@example.com" in pdf_to_txt("test_example.pdf")
+@pytest.fixture(scope="module")
+def anonymized_text():
+    anonymize(TEST_PDF_PATH)
+    return read_txt_file(ANONYMIZED_TEXT_PATH)
 
 
-def test_anonymize_address():
-    text=txt_to_string('anonymized_text.txt')
-    assert "22 Rue Didouche Mourad Algiers, Algeria" not in text and "22 Rue Didouche Mourad Algiers, Algeria" in pdf_to_txt("test_example.pdf")
+# Tests
+def test_anonymize_name(pdf_file, anonymized_text):
+    assert "John Doe" not in anonymized_text
+    assert "John Doe" in pdf_file
+
+
+def test_anonymize_phone(pdf_file, anonymized_text):
+    assert "07816093423" not in anonymized_text
+    assert "07816093423" in pdf_file
+
+
+def test_anonymize_email(pdf_file, anonymized_text):
+    assert "louisbond@example.com" not in anonymized_text
+    assert "louisbond@example.com" in pdf_file
+
+
+def test_anonymize_address(pdf_file, anonymized_text):
+    assert "22 Rue Didouche Mourad Algiers, Algeria" not in anonymized_text
+    assert "22 Rue Didouche Mourad Algiers, Algeria" in pdf_file
