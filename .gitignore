@@ -1,4 +1,4 @@
 .env
-.anonymized_text
+.anonymized_text.txt
 .__pycache__/
-..pytest_cache
+.pytest_cache
