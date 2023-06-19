@@ -39,5 +39,3 @@ def anonymize(filename:str):
         file.write(result.text)
     
 
-if __name__=="__main__":
-    anonymize("test_example.pdf")
