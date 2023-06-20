@@ -4,9 +4,9 @@ from fastapi import APIRouter, File, Form, UploadFile
 from app.utils.anonymize import anonymize
 
 
-router = APIRouter()
+anonymize_router = APIRouter()
 
-@router.post("/anonymize")
+@anonymize_router.post("/anonymize")
 async def anonymize_file(name:str=Form(...),file:UploadFile=File(...)):
     upload_dir = os.path.join(os.getcwd(), "uploads")
     # Create the upload directory if it doesn't exist

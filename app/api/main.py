@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from routers import anonymize_file
+from routers.anonymize_file import anonymize_router
 
 app = FastAPI()
-app.include_router(anonymize_file.router)
+app.include_router(anonymize_router)
 
 @app.get('/')
 def root():
