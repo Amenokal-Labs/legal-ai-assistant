@@ -38,4 +38,7 @@ def anonymize(filename:str):
     with open('anonymized_text.txt','w')as file:
         file.write(result.text)
     
+    return result.text
+    
+    
 
