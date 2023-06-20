@@ -8,4 +8,4 @@ Running unit tests on anonymize.py using pytest
 ## installing requirements using pip
 pip install -r requirements.txt
 ## To run the API
-uvicorn main:app --reload
+uvicorn app.api.main:app --reload
