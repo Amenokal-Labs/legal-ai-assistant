@@ -1,7 +1,6 @@
 presidio_analyzer==2.2.33
 presidio_anonymizer==2.2.33
 spacy==3.5.3
-en_core_web_lg==3.5.0
 pdfplumber==0.9.0
 pytest==7.3.2
 openai==0.27.8
