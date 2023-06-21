@@ -4,7 +4,7 @@ from app.utils.utils import read_pdf_file, read_txt_file
 
 # Constants
 TEST_PDF_PATH = "tests/example.pdf"
-ANONYMIZED_TEXT_PATH = "tests/anonymized_text.txt"
+ANONYMIZED_TEXT_PATH = "anonymized_text.txt"
 
 # Fixtures
 @pytest.fixture(scope="module")
