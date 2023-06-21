@@ -9,6 +9,8 @@ Running unit tests on anonymize.py using pytest
 pip install -r requirements.txt
 ## To run the API
 uvicorn app.api.main:app --reload  
-### To anonymize a file run the following command 
-In windows: **curl.exe -X POST -F "file=@tests\example.pdf" http://localhost:8000/anonymize**  
-The equivalent command for linux/mac: **curl http://localhost:8000/anonymize -F "file=@tests/example.pdf"**
+## Commands To Use The API  
+- /anomymize endpoint  
+  **curl http://localhost:8000/anonymize -F "file=@tests/example.pdf"**         
+- /ask endpoint  
+  **curl -X GET "http://127.0.0.1:8000/ask?question=your_question" -H "accept: application/json"**
