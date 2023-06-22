@@ -3,9 +3,7 @@ from presidio_analyzer import AnalyzerEngine
 from presidio_anonymizer.entities import OperatorConfig
 from app.utils.utils import read_pdf_file
 
-def anonymize(filename:str):
-    #read pdf file
-    text=read_pdf_file(filename)
+def anonymize_text(text:str):
 
     # 1/ Analyzer 
     analyzer = AnalyzerEngine()
@@ -34,11 +32,17 @@ def anonymize(filename:str):
         text=text, analyzer_results=analyzer_results,operators=operators
     )
     
+    return result.text
+
+def anonymize_pdf_file(filename:str):
+    #read pdf file
+    text=read_pdf_file(filename)
+    anonymized_text=anonymize_text(text)
     #storing the results
     with open('anonymized_text.txt','w')as file:
-        file.write(result.text)
+        file.write(anonymized_text)
     
-    return result.text
+    return anonymized_text
     
     
 
