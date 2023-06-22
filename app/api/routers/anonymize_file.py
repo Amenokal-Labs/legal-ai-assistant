@@ -1,13 +1,13 @@
 import os
 import shutil
 from fastapi import APIRouter, File, UploadFile
-from app.utils.anonymize import anonymize
+from app.utils.anonymize import anonymize_pdf_file
 
 
 anonymize_router = APIRouter()
 
 @anonymize_router.post("/anonymize")
-async def anonymize_file(file:UploadFile=File(...)):
+async def anonymize(file:UploadFile=File(...)):
     upload_dir = os.path.join(os.getcwd(), "uploads")
     # Create the upload directory if it doesn't exist
     if not os.path.exists(upload_dir):
@@ -18,6 +18,6 @@ async def anonymize_file(file:UploadFile=File(...)):
     with open(dest, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     
-    text_anonymized=anonymize(dest)
+    text_anonymized=anonymize_pdf_file(dest)
 
     return {"filename": file.filename,"anonymized-content":text_anonymized}

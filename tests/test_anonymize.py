@@ -1,5 +1,5 @@
 import pytest
-from app.utils.anonymize import anonymize
+from app.utils.anonymize import anonymize_pdf_file
 from app.utils.utils import read_pdf_file, read_txt_file
 
 # Constants
@@ -14,7 +14,7 @@ def pdf_file():
 
 @pytest.fixture(scope="module")
 def anonymized_text():
-    anonymize(TEST_PDF_PATH)
+    anonymize_pdf_file(TEST_PDF_PATH)
     return read_txt_file(ANONYMIZED_TEXT_PATH)
 
 
