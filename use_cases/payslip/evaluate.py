@@ -25,6 +25,3 @@ def evaluate(file_path: str):
                 time.sleep(1)
             else:
                 time.sleep(60)
-
-
-
