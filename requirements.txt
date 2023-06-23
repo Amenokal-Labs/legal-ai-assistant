@@ -1,3 +1,4 @@
+pip==23.1.2
 presidio_analyzer==2.2.33
 presidio_anonymizer==2.2.33
 spacy==3.5.3
@@ -7,6 +8,6 @@ openai==0.27.8
 python-multipart==0.0.6
 fastapi==0.97.0
 uvicorn==0.22.0
-python-dotenv==1.0.0
+python-dotenv
 requests~=2.31.0
 https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.5.0/en_core_web_lg-3.5.0.tar.gz
