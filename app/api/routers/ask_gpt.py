@@ -10,7 +10,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 @ask_router.get('/ask')
-async def ask(question: str, text: str | None):
+def ask(question: str, text: str):
     anonymized_text = anonymize_text(text)
     resp = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
