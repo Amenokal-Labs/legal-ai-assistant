@@ -8,9 +8,9 @@ Running unit tests on anonymize.py using pytest
 ## installing requirements using pip
 pip install -r requirements.txt
 ## To run the API
-uvicorn app.api.main:app --reload  
+uvicorn server.app.api.main:app --reload  
 ## Commands To Use The API  
 - ### /anomymize endpoint  
   curl http://localhost:8000/anonymize -F "file=@tests/example.pdf"        
 - ### /ask endpoint  
-  curl "http://127.0.0.1:8000/ask?question=your_question"    
+  curl "http://localhost:8000/ask?question=your_question"    

@@ -1,6 +1,6 @@
 import pytest
-from app.utils.anonymize import anonymize_pdf_file
-from app.utils.utils import read_pdf_file, read_txt_file
+from server.app.utils.anonymize import anonymize_pdf_file
+from server.app.utils.utils import read_pdf_file, read_txt_file
 
 # Constants
 TEST_PDF_PATH = "tests/example.pdf"

@@ -1,7 +1,7 @@
 from presidio_anonymizer import AnonymizerEngine
 from presidio_analyzer import AnalyzerEngine
 from presidio_anonymizer.entities import OperatorConfig
-from app.utils.utils import read_pdf_file
+from server.app.utils.utils import read_pdf_file
 
 def anonymize_text(text:str):
 

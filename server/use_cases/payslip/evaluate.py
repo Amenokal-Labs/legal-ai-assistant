@@ -3,7 +3,7 @@ import time
 import requests as req
 from dotenv import load_dotenv
 import openai
-from app.utils.utils import read_pdf_file
+from server.app.utils.utils import read_pdf_file
 
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
