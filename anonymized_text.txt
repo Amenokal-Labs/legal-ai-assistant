@@ -1,0 +1,24 @@
+Payslip
+Zoonodle Inc <ANONYMIZED>
+Pearson Point Road
+Gate Avenue
+Date of Joining : <ANONYMIZED> Employee Name: <ANONYMIZED>
+Pay Period : <ANONYMIZED> Designation: Marketing Evecutive
+Worked Days : 26 Department: Marketing
+Email : <ANONYMIZED> Address: 2 Madison avenue NWC
+Earnings Amount
+Basic Pay $10000
+Icentive Pay $1000
+House Rent Allowance $400
+Meal Allowance $200
+Total Earnings $11600
+Deductions Amount
+Provident Fund $1200
+Profesional Tax $500
+Loan $400
+Total Deductions $2100
+Net Pay $9500
+$9500
+Nine Thousand Five Hundred
+Employer Signature Employee Signature
+This is system generated payslip

@@ -28,8 +28,12 @@ textarea{
     font-size:  0.95rem;
 }
 .response-text{
+    margin: auto;
     font-size:  0.95rem;
     text-align: justify;
+    width:70%;
+    height: fit-content;
+    padding: 1rem;
 }
 
 .form-field-file {

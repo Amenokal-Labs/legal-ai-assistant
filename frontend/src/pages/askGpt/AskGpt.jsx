@@ -66,11 +66,11 @@ function AskGpt() {
                 <label htmlFor='file' > Share Your Legal Document </label>
                 <input type="file" id='file' onChange={handleFileChange}/>
             </div>
-            { response &&
+            { response && !generateResp?
             <div>
                 <h4> Answer : </h4>
                 <div className="response-text">{response}</div>
-            </div>
+            </div>:null
             }
         
             {generateResp && 
