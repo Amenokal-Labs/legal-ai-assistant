@@ -14,3 +14,8 @@ uvicorn server.app.api.main:app --reload
   curl http://localhost:8000/anonymize -F "file=@tests/example.pdf"        
 - ### /ask endpoint  
   curl "http://localhost:8000/ask?question=your_question"    
+
+##  To run the frontend  
+cd frontend  
+npm install  
+npm start
