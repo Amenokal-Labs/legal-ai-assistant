@@ -1,12 +1,14 @@
-FROM python:3.9.7
+FROM python:3.11-alpine
 
-WORKDIR /usr/src/application
+COPY requirements.txt /application/
 
-COPY requirements.txt ./
+COPY app /application/
+
+COPY .env /application/
+
+WORKDIR /application
 
 RUN pip install --no-cache-dir -r requirements.txt
-
-RUN python -m spacy download en_core_web_lg
 
 COPY . .
 
