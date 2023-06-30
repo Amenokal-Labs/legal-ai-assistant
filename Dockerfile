@@ -4,8 +4,6 @@ COPY requirements.txt /application/
 
 COPY app /application/
 
-COPY .env /application/
-
 WORKDIR /application
 
 RUN pip install --no-cache-dir -r requirements.txt
