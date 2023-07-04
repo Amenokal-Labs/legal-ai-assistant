@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './askGpt.css'
 
 function AskGpt() {
+    const url="https://legalassist.onrender.com"
     const [form,setForm]=useState({
         prompt:'',
         file:null
@@ -26,7 +27,7 @@ function AskGpt() {
         setGenerateResp(true)
         const text = await anonymizeFile()
         try{
-        const res = await fetch("http://localhost:8000/ask",{
+        const res = await fetch(`${url}/ask`,{
         method:"POST",
         headers: {
         'Content-Type': 'application/json'
@@ -47,7 +48,7 @@ function AskGpt() {
         const formData=new FormData()
         formData.append('file',form.file)
         try{
-        const res = await fetch("http://localhost:8000/anonymize",{
+        const res = await fetch(`${url}/anonymize`,{
         method:'POST',
         body:formData,
         })

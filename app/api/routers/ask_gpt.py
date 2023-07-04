@@ -18,7 +18,6 @@ class AskRequest(BaseModel):
 def ask(request: AskRequest):
     text = request.text
     question = request.question
-    anonymized_text = anonymize_text(text)
     resp = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -31,7 +30,7 @@ def ask(request: AskRequest):
                         "through it by heart to deliver correct knowledge and information extracted from the document "
                         "which align perfectly with the user enquiries about the file and to develop useful resources "
                         "from your current and previous experiences that user can use and will be beneficial to him."},
-            {"role": "user", "content": anonymized_text},
+            {"role": "user", "content": text},
             {"role": "user", "content": f'considering the document I sent answer the following question: {question}'}
         ]
     )
