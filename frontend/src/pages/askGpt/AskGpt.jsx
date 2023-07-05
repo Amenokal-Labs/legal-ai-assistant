@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import './askGpt.css'
 
 function AskGpt() {
-    const url="https://legalassist.onrender.com"
+    const url= process.env.REACT_APP_URL
+    
     const [form,setForm]=useState({
         prompt:'',
         file:null

@@ -7,7 +7,7 @@ Helper functions for converting pdf file to txt using pdfplumber and reading fro
 Running unit tests on anonymize.py using pytest
 ## installing requirements using pip
 pip install -r requirements.txt
-## To run the APP  
+## To run the APP locally
   In order to make the full App works on the user's local machine, It's required to launch the api first then running the frontend by executing the scripts below:  
   ### To run the API      
     uvicorn app.api.main:app --reload  
@@ -24,3 +24,6 @@ pip install -r requirements.txt
      cd frontend  
      npm install  
      npm start
+
+## Link to the deployed API  
+- https://legalassist.onrender.com
