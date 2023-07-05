@@ -13,7 +13,7 @@ async def anonymize(file:UploadFile=File(...)):
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
     # get the destination path
-    dest = os.path.join(upload_dir, file.filename)
+    dest = os.path.join(upload_dir, 'uploadedFile')
     # copy the file contents to pdf file in destination dest (uploads/filename)
     with open(dest, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
