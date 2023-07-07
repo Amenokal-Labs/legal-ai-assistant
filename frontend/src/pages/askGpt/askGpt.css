@@ -1,8 +1,8 @@
 .askGpt-wrapper{
-    width:90%;
+    width:80%;
     height: 100%;
     margin: 0px;
-    padding: 2rem;
+    padding: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -18,21 +18,39 @@
 
 textarea{
     width:70%;
-    padding:10px 11px 10px 11px;
-    border-radius:30px;
+    padding:15px;
+    height: 25px;
     outline:none;
     border-style: none;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    margin: 1rem 0.3rem 0.5rem 0.3rem;
     text-align: justify;
     font-size:  0.95rem;
+    resize: none;
+    background: none;
+    color:rgba(255, 255, 255, 0.555);
+    font-weight: 300;
+    transition: all 0.2s;
+}
+
+textarea::-webkit-scrollbar{
+    width: 0px;
+}
+
+textarea::after{
+    width:100%;
+    height: 2px;
+    color: aliceblue;
+}
+
+.loading-text{
+    font-size: 1rem;
 }
 .response-text{
     margin: auto;
     font-size:  0.95rem;
-    text-align: justify;
+    text-align:justify;
     width:70%;
-    height: fit-content;
+    max-height: 400px;
     padding: 1rem;
 }
 
@@ -44,15 +62,15 @@ textarea{
 }
 
 input[type="file"]::file-selector-button{
-        width: 12rem;
-        height: 3rem;
+        width: 10rem;
+        height: 2rem;
         margin-top: 1rem;
         margin-right: 0.5rem;
         border: 2px solid #5978F3;
         border-radius: 45px;
         transition: all 0.3s;
         cursor: pointer;
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 550;
         color: white;
         background: #031131;
@@ -61,7 +79,7 @@ input[type="file"]::file-selector-button{
 input[type="file"]::file-selector-button:hover {
         background: #5978F3;
         color: white;
-        font-size: 1.3em;
+        font-size: 1em;
     }
 
 
@@ -69,23 +87,73 @@ label{
     font-size:  0.95rem;
     }
 
-.form-field {
+.form-text-field {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     }
 
 button[type="submit"]{
-    color: white;
-    background: #031131;
-    padding: 0.5rem 2rem 0.5rem 2rem;
-    border-radius: 5rem;
-    border: 2px solid;
-    font-size: 1.2rem;
+    color: whitesmoke;
+    font-size: 1rem;
+    font-weight: 400;
+    border: none; 
+    background: none; 
+    padding: 0;
+    outline: none;
     line-height: 1em;
     cursor: pointer;
     transition: all 0.3s;
 }
 button[type="submit"]:hover{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+}
+
+
+@media screen and (max-width:450px) {
+    .askGpt-wrapper{
+        width: 95%
+    }
+    textarea{
+        width:100%;
+        font-size: 0.7rem
+    }
+    label{
+        font-size:  0.5rem;
+        }
+
+        button[type="submit"]{
+            font-size: 0.7rem;
+        }
+        button[type="submit"]:hover{
+            font-size: 0.7rem;
+        }
+        input[type="file"]::file-selector-button{
+            width: 7rem;
+            height: 1.5rem;
+            border: 1px solid #5978F3;
+            font-size: 0.6rem;
+
+        }
+        
+    input[type="file"]::file-selector-button:hover {
+            font-size: 0.7rem;
+        }
+        .loading-text{
+            font-size: 0.7rem;
+        }
+        .response-text{
+            font-size:  0.7rem;
+            width:90%;
+            padding: 1rem;
+        }
+}
+
+@media screen and (max-width:700px) {
+
+        .response-text{
+            font-size:  0.8rem;
+            width:90%;
+            padding: 1rem;
+        }
 }
