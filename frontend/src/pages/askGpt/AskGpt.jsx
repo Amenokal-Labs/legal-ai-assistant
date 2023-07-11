@@ -91,7 +91,7 @@ function AskGpt() {
         <form className='ask-form' onSubmit={handleSubmit}>
             <div className='form-field-file'>
                 <label htmlFor='file' > Share Your Legal Document </label>
-                <input type="file" id='file' onChange={handleFileChange} required/>
+                <input type="file" id='file' onChange={handleFileChange} required accept='.pdf'/>
             </div>
             { response && !generateResp?
 

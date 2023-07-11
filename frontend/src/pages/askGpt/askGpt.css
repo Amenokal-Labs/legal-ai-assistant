@@ -7,13 +7,15 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    overflow: hidden;
 }
 
 .ask-form{
     width: 100%;
     display: flex;
     flex-direction: column;
-    
+    min-height: 0px;
+    overflow: hidden;
 }
 
 textarea{
@@ -50,8 +52,9 @@ textarea::after{
     font-size:  0.95rem;
     text-align:justify;
     width:70%;
-    max-height: 400px;
+    max-height: 200px;
     padding: 1rem;
+    overflow: hidden;
 }
 
 .form-field-file {
@@ -110,6 +113,28 @@ button[type="submit"]:hover{
 }
 
 
+@media screen and (max-width:700px) {
+
+    .response-text{
+        font-size:  0.9rem;
+        width:90%;
+        padding: 1rem;
+    }
+    .ask-form{
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+    }
+    .form-field-file{
+        margin-top: 35%;
+    }
+    label{
+        font-size:  0.7rem;
+        }
+
+
+}
+
 @media screen and (max-width:450px) {
     .askGpt-wrapper{
         width: 95%
@@ -119,7 +144,7 @@ button[type="submit"]:hover{
         font-size: 0.7rem
     }
     label{
-        font-size:  0.5rem;
+        font-size:  0.6rem;
         }
 
         button[type="submit"]{
@@ -143,17 +168,9 @@ button[type="submit"]:hover{
             font-size: 0.7rem;
         }
         .response-text{
-            font-size:  0.7rem;
-            width:90%;
-            padding: 1rem;
-        }
-}
-
-@media screen and (max-width:700px) {
-
-        .response-text{
             font-size:  0.8rem;
             width:90%;
             padding: 1rem;
         }
 }
+

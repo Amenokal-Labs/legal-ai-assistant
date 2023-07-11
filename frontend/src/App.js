@@ -5,7 +5,7 @@ import "./App.css"
 function App() {
   return (
     <div className="App">
-      <h1>Ask Your Legal Ai Assistant</h1>
+      <h1 className='app-title'>Ask Your Legal Ai Assistant</h1>
       <AskGpt/>
     </div>
   );
