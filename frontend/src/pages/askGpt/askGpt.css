@@ -52,7 +52,7 @@ textarea::after{
     font-size:  0.95rem;
     text-align:justify;
     width:70%;
-    max-height: 200px;
+    max-height: 330px;
     padding: 1rem;
     overflow: hidden;
 }
