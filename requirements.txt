@@ -10,3 +10,6 @@ uvicorn==0.22.0
 python-dotenv==1.0.0
 requests~=2.31.0
 https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.5.0/en_core_web_lg-3.5.0.tar.gz
+langchain==0.0.209
+tiktoken==0.4.0
+faiss-cpu==1.7.4
