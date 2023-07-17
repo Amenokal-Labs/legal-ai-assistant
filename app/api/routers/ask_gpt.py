@@ -3,7 +3,7 @@ import openai
 from fastapi import APIRouter
 from dotenv import load_dotenv
 from pydantic import BaseModel
-from app.utils.large_files import useEmbeddings
+from app.utils.large_files import use_embeddings
 
 load_dotenv()
 ask_router = APIRouter()
@@ -18,6 +18,6 @@ class AskRequest(BaseModel):
 def ask(request: AskRequest):
     text = request.text
     question = request.question
-    response=useEmbeddings(text,question)
+    response=use_embeddings(text,question)
     return {'response': response}
     
