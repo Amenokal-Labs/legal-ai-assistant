@@ -1,4 +1,5 @@
 import os
+from typing import List
 import openai
 from fastapi import APIRouter
 from dotenv import load_dotenv
@@ -10,7 +11,7 @@ ask_router = APIRouter()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class AskRequest(BaseModel):
-    question: str
+    question: List[str]
     text: str
 
 
