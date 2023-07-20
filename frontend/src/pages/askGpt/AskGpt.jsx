@@ -88,6 +88,7 @@ function AskGpt() {
 
             const data = await res.json()
             console.log(data['response'])
+            console.log(data)
             setResponse(data['response'])
             setGenerateResp(false)
             } catch(err){

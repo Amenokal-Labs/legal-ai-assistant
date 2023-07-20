@@ -14,6 +14,7 @@ load_dotenv()
 
 langchain.embeddings.openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
 def use_embeddings(text: str,question:List[str]):
     # Splitting up the text into smaller chunks for indexing
     text_splitter = CharacterTextSplitter(        
