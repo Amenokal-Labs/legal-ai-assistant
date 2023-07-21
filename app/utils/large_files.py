@@ -1,4 +1,5 @@
 import os
+from typing import List
 from dotenv import load_dotenv
 import langchain
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -13,7 +14,8 @@ load_dotenv()
 
 langchain.embeddings.openai.api_key = os.getenv("OPENAI_API_KEY")
 
-def use_embeddings(text: str,question:str):
+
+def use_embeddings(text: str,question:List[str]):
     # Splitting up the text into smaller chunks for indexing
     text_splitter = CharacterTextSplitter(        
         separator = "\n",
@@ -30,7 +32,10 @@ def use_embeddings(text: str,question:str):
     prompt = PromptTemplate(input_variables=['context', 'question'], 
                             output_parser=None, partial_variables={}, template=template, template_format='f-string', validate_template=True)
     chain.llm_chain.prompt=prompt
-    docs = docsearch.similarity_search(question,k=10)
+    docs=[]
+    for q in question:
+        doc = docsearch.similarity_search(q,k=10)
+        docs.extend(doc)
     return chain.run(input_documents=docs, question=question)
 
 
