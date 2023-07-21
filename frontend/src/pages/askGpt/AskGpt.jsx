@@ -83,7 +83,7 @@ function AskGpt() {
             headers: {
             'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"question":prompt,"text":text})
+            body: JSON.stringify({"questions":prompt,"text":text})
             })
 
             const data = await res.json()
