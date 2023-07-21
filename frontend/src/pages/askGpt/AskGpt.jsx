@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import ReactScrollableFeed from 'react-scrollable-feed'
 import './askGpt.css'
 
@@ -15,7 +15,22 @@ function AskGpt() {
     const [otherQuestions,setQuestions]= useState([])
 
     const [response,setResponse]=useState(null)
+    const [formattedResponse,setFormattedResponse]=useState('')
     const [generateResp,setGenerateResp]=useState(false)
+
+    useEffect(()=>{
+        if (response != null){
+        // Extract question-answer pairs
+        const questionAnswers = response.split('\n\n');
+        // Format the questions and answers for display
+        const formattedText = questionAnswers.map((qa, index) => (
+            <div key={index}>
+            <strong>Question {index + 1}:</strong> {qa.replace(`Question ${index + 1}: `, ' ')}
+            </div>
+        ));
+        // Set the formatted response for rendering
+        setFormattedResponse(formattedText);}
+    },[response])
 
     const handlePromptChange=(e)=>{
         setForm({...form,prompt:e.target.value})
@@ -78,6 +93,7 @@ function AskGpt() {
             try{
             setForm({...form,prompt:''})
             textareaRef.current.style.height = '25px'
+            setQuestions([])
             const res = await fetch(`${url}/ask`,{
             method:"POST",
             headers: {
@@ -87,8 +103,6 @@ function AskGpt() {
             })
 
             const data = await res.json()
-            console.log(data['response'])
-            console.log(data)
             setResponse(data['response'])
             setGenerateResp(false)
             } catch(err){
@@ -114,8 +128,8 @@ function AskGpt() {
     }
 
     const validate = () => {
-        if (form.prompt && form.file) return true
-        else return false
+        if (!form.prompt || !form.file) return false
+        return(otherQuestions.every((q) => q.question.length !== 0))
     }
 
     return (
@@ -130,7 +144,7 @@ function AskGpt() {
                 <div className="response-text">
                     <ReactScrollableFeed>
                         <h4> Answer : </h4>
-                        <p>{response}</p>
+                        <div>{formattedResponse}</div>
                     </ReactScrollableFeed>
                 </div> :null
                 
@@ -144,14 +158,15 @@ function AskGpt() {
                 <label htmlFor='prompt'> Your Question </label>
                 <textarea id='prompt' ref={textareaRef} placeholder='Type Your Question' value={form.prompt} onChange={handlePromptChange} onKeyUp={handleTextAreaResize} required />
                 <button type='submit' onClick={handleClick}>Send</button>
-                <button type='button' onClick={handleAddQuestion}>+</button>
-                {otherQuestions.length>0 &&
-                <button type='button' onClick={handleRemoveQuestion}>-</button>
-                }
-                
+                <div className='question-buttons'>
+                    <button type='button' onClick={handleAddQuestion}>+</button>
+                    {otherQuestions.length>0 &&
+                    <button type='button' onClick={handleRemoveQuestion}>-</button>
+                    }
+                </div>
             </div>
             {otherQuestions.map((q,index)=>{
-                return <div key={index}><input type='text' value={q.question} name={`q${index}`}  placeholder={`Type Your Question ${index + 2}`} onChange={(e)=> handleQuestionChange(e.target.value,index)} /></div>
+                return <div key={index}><input id='other-questions-input' type='text' value={q.question} name={`q${index}`}  placeholder={`Type Your Question ${index + 2}`} onChange={(e)=> handleQuestionChange(e.target.value,index)} required /></div>
             })}
         </form>
 
