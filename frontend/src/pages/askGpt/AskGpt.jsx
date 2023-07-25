@@ -52,8 +52,9 @@ function AskGpt() {
     }
 
     const handleAddQuestion = (e) => {
+        if(otherQuestions.length<=8){
         const updatedQuestions = [...otherQuestions, { question: '' }];
-        setQuestions(updatedQuestions);
+        setQuestions(updatedQuestions);}
     };
 
     const handleRemoveQuestion = (e) => {
@@ -159,15 +160,34 @@ function AskGpt() {
                 <textarea id='prompt' ref={textareaRef} placeholder='Type Your Question' value={form.prompt} onChange={handlePromptChange} onKeyUp={handleTextAreaResize} required />
                 <button type='submit' onClick={handleClick}>Send</button>
                 <div className='question-buttons'>
+                    {otherQuestions.length <=
+                     0 &&
                     <button type='button' onClick={handleAddQuestion}>+</button>
-                    {otherQuestions.length>0 &&
-                    <button type='button' onClick={handleRemoveQuestion}>-</button>
                     }
                 </div>
             </div>
-            {otherQuestions.map((q,index)=>{
-                return <div key={index}><input id='other-questions-input' type='text' value={q.question} name={`q${index}`}  placeholder={`Type Your Question ${index + 2}`} onChange={(e)=> handleQuestionChange(e.target.value,index)} required /></div>
-            })}
+                {otherQuestions.map((q,index)=>{
+                    return (
+                    <div style={{display:'flex',gap:'0px',justifyContent:'space-around'}}>
+                    <div className='other-questions-wrapper'>
+                        <div id='other-questions'>
+                            <div key={index}><input id='other-questions-input' type='text' value={q.question} name={`q${index}`}  placeholder={`Type Your Question ${index + 2}`} onChange={(e)=> handleQuestionChange(e.target.value,index)} required /></div>
+                        </div>
+                    </div>
+                        
+                    {index === 0 ?
+                            <div className='question-buttons'>
+                            <button type='button' onClick={handleAddQuestion}>+</button>
+                            <button type='button' onClick={handleRemoveQuestion}>-</button>
+                            </div>
+                    :  <div className='question-buttons'>
+                        <button type='button' onClick={handleAddQuestion} style={{opacity:0, pointerEvents: 'none'}}>+</button>
+                        <button type='button' onClick={handleRemoveQuestion} style={{opacity:0, pointerEvents: 'none'}}>-</button>
+                    </div>
+                    }
+                    </div>
+                    )
+                })}
         </form>
 
     </div>
