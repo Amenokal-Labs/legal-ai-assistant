@@ -26,7 +26,6 @@
 textarea{
     width:70%;
     padding:15px;
-    height: 23px;
     outline:none;
     border-style: none;
     border-radius: 10px;
@@ -38,20 +37,22 @@ textarea{
     color:rgba(255, 255, 255, 0.577);
     background-color: #243551c3;
     font-weight: 300;
-    transition: all 0.2s;
-    
 }
 
 textarea::-webkit-scrollbar{
     width: 0px;
 }
 
-
-
 textarea:focus{
     border: 1px solid #5978F3;
 }
+textarea::placeholder {
+    color: #4c5661;
+}
 
+input::placeholder {
+    color: #4c5661;
+}
 .other-questions-wrapper{
     display: flex;
     flex-direction: column;
@@ -173,6 +174,19 @@ button[type="button"]{
 
 
 
+@media screen and  (max-width:800px) {
+    .other-questions-wrapper{
+        transform: translateX(40px);
+    }
+}
+@media screen and (max-width:700px) {
+
+    .response-text{
+        font-size:  0.8rem;
+        width:90%;
+        padding: 1rem;
+    }
+}
 
 @media screen and (max-width:515px) {
     .askGpt-wrapper{
@@ -217,11 +231,9 @@ button[type="button"]{
     }
 }
 
-@media screen and (max-width:700px) {
-
-        .response-text{
-            font-size:  0.8rem;
-            width:90%;
-            padding: 1rem;
-        }
+@media screen and  (max-width:400px) {
+    .other-questions-wrapper{
+        transform: translateX(20px);
+    }
 }
+

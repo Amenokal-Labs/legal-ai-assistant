@@ -13,7 +13,6 @@ function AskGpt() {
     })
 
     const [otherQuestions,setQuestions]= useState([])
-
     const [response,setResponse]=useState(null)
     const [formattedResponse,setFormattedResponse]=useState('')
     const [generateResp,setGenerateResp]=useState(false)
@@ -32,21 +31,37 @@ function AskGpt() {
         setFormattedResponse(formattedText);}
     },[response])
 
+    
     const handlePromptChange=(e)=>{
         setForm({...form,prompt:e.target.value})
+        handleTextAreaResize()
+       
     }
 
-    const handleTextAreaResize = (e) => {
-        const textarea = textareaRef.current
-        textarea.style.height = '25px'
-        if(textarea.scrollHeight <= '70px'){
-            textarea.style.height = `${textarea.scrollHeight}px`
-        } else {
-            textarea.style.height='70px'
-            textarea.style.setProperty('-webkit-scrollbar-width', '5px');
-        }
-    };
-
+    const handleTextAreaResize = () => {
+        const textarea = textareaRef.current;
+        const computedStyle = window.getComputedStyle(textarea);
+        const paddingTop = parseInt(computedStyle.paddingTop);
+        const paddingBottom = parseInt(computedStyle.paddingBottom);
+        const totalPadding = paddingTop + paddingBottom;
+    
+        textarea.style.height = '25px';
+        textarea.style.overflowY = 'hidden'; // To hide vertical scrollbar while resizing
+    
+        const currentScrollHeight = textarea.scrollHeight - totalPadding;
+        const contentHeight = Math.max(currentScrollHeight, 25);
+    
+        textarea.style.height = `${contentHeight}px`;
+      };
+    
+      useEffect(() => {
+        handleTextAreaResize(); // Initial resize when the component mounts
+      }, []);
+    
+    
+    
+      
+  
     const handleFileChange=(e)=>{
         setForm({...form,file:e.target.files[0]})
     }
@@ -157,7 +172,13 @@ function AskGpt() {
             }
             <div className='form-text-field'>
                 <label htmlFor='prompt'> Your Question </label>
-                <textarea id='prompt' ref={textareaRef} placeholder='Type Your Question' value={form.prompt} onChange={handlePromptChange} onKeyUp={handleTextAreaResize} required />
+                <textarea id='prompt' ref={textareaRef} 
+                placeholder='Type Your Question' 
+                value={form.prompt} 
+                onChange={handlePromptChange}
+                onInput={handleTextAreaResize}
+                onKeyUp={handleTextAreaResize} // To handle resizing after deleting content
+                required />
                 <button type='submit' onClick={handleClick}>Send</button>
                 <div className='question-buttons'>
                     {otherQuestions.length <=
@@ -168,23 +189,24 @@ function AskGpt() {
             </div>
                 {otherQuestions.map((q,index)=>{
                     return (
-                    <div style={{display:'flex',gap:'0px',justifyContent:'space-around'}}>
+                    
                     <div className='other-questions-wrapper'>
-                        <div id='other-questions'>
-                            <div key={index}><input id='other-questions-input' type='text' value={q.question} name={`q${index}`}  placeholder={`Type Your Question ${index + 2}`} onChange={(e)=> handleQuestionChange(e.target.value,index)} required /></div>
-                        </div>
-                    </div>
-                        
-                    {index === 0 ?
-                            <div className='question-buttons'>
-                            <button type='button' onClick={handleAddQuestion}>+</button>
-                            <button type='button' onClick={handleRemoveQuestion}>-</button>
+                        <div style={{display:'flex',gap:'0px',justifyContent:'space-around'}}>
+                            <div id='other-questions'>
+                                <div key={index}><input id='other-questions-input' type='text' value={q.question} name={`q${index}`}  placeholder={`Type Your Question ${index + 2}`} onChange={(e)=> handleQuestionChange(e.target.value,index)} required /></div>
                             </div>
-                    :  <div className='question-buttons'>
-                        <button type='button' onClick={handleAddQuestion} style={{opacity:0, pointerEvents: 'none'}}>+</button>
-                        <button type='button' onClick={handleRemoveQuestion} style={{opacity:0, pointerEvents: 'none'}}>-</button>
-                    </div>
-                    }
+                                {index === 0 ?
+                                    <div className='question-buttons'>
+                                    <button type='button' onClick={handleAddQuestion}>+</button>
+                                    <button type='button' onClick={handleRemoveQuestion}>-</button>
+                                    </div>
+                            :  <div className='question-buttons'>
+                                <button type='button' onClick={handleAddQuestion} style={{opacity:0, pointerEvents: 'none'}}>+</button>
+                                <button type='button' onClick={handleRemoveQuestion} style={{opacity:0, pointerEvents: 'none'}}>-</button>
+                            </div>
+                            }
+                        </div>
+                        
                     </div>
                     )
                 })}
