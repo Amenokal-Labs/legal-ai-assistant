@@ -13,25 +13,10 @@ function AskGpt() {
     })
 
     const [otherQuestions,setQuestions]= useState([])
-    const [response,setResponse]=useState(null)
-    const [formattedResponse,setFormattedResponse]=useState('')
+    const [response,setResponse]=useState('')
     const [generateResp,setGenerateResp]=useState(false)
 
-    useEffect(()=>{
-        if (response != null){
-        // Extract question-answer pairs
-        const questionAnswers = response.split('\n\n');
-        // Format the questions and answers for display
-        const formattedText = questionAnswers.map((qa, index) => (
-            <div key={index}>
-            <strong>Question {index + 1}:</strong> {qa.replace(`Question ${index + 1}: `, ' ')}
-            </div>
-        ));
-        // Set the formatted response for rendering
-        setFormattedResponse(formattedText);}
-    },[response])
 
-    
     const handlePromptChange=(e)=>{
         setForm({...form,prompt:e.target.value})
         handleTextAreaResize()
@@ -95,6 +80,20 @@ function AskGpt() {
     const handleSubmit=(e)=>{
         e.preventDefault()
     }
+    const handleStream = ()=>{
+        const evtSource = new EventSource("http://127.0.0.1:8000/stream/askstream");
+        evtSource.addEventListener("new_message", function (event) {
+            // Logic to handle status updates
+            setResponse(prevResponse => prevResponse + event.data);
+            console.log(event.data)
+          });
+      
+          evtSource.addEventListener("end_event", function (event) {
+            console.log(event.data)
+            evtSource.close();
+            setGenerateResp(false)
+          });
+      }
 
     const handleClick = async () => {
         if(validate()){
@@ -104,23 +103,23 @@ function AskGpt() {
             for(const q of otherQuestions){
                 prompt.push(q.question)
             }
-            console.log(prompt)
             const text = await anonymizeFile()
             try{
             setForm({...form,prompt:''})
             textareaRef.current.style.height = '25px'
             setQuestions([])
-            const res = await fetch(`${url}/ask`,{
+            const res = await fetch(`${url}stream/ask`,{
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
             },
             body: JSON.stringify({"questions":prompt,"text":text})
             })
-
-            const data = await res.json()
-            setResponse(data['response'])
-            setGenerateResp(false)
+            console.log(res)
+            
+            // Handle the SSE data using EventSource
+            handleStream()
+            
             } catch(err){
             console.log(`error while sending request to ask endpoint ${err.message}`)
             }
@@ -131,7 +130,7 @@ function AskGpt() {
         const formData=new FormData()
         formData.append('file',form.file)
         try{
-        const res = await fetch(`${url}/anonymize`,{
+        const res = await fetch(`${url}anonymize`,{
         method:'POST',
         body:formData,
         })
@@ -159,8 +158,7 @@ function AskGpt() {
 
                 <div className="response-text">
                     <ReactScrollableFeed>
-                        <h4> Answer : </h4>
-                        <div>{formattedResponse}</div>
+                        <div>{response}</div>
                     </ReactScrollableFeed>
                 </div> :null
                 

@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <h1>Ask Your Legal Ai Assistant</h1>
-      <AskGpt/>
+      <AskGpt />
     </div>
   );
 }
