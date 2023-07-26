@@ -11,14 +11,14 @@ ask_router = APIRouter()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class AskRequest(BaseModel):
-    question: List[str]
+    questions: List[str]
     text: str
 
 
 @ask_router.post('/ask')
 def ask(request: AskRequest):
     text = request.text
-    question = request.question
-    response=use_embeddings(text,question)
+    questions = request.questions
+    response=use_embeddings(text,questions)
     return {'response': response}
     

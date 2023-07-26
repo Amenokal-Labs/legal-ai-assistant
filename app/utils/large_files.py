@@ -15,7 +15,7 @@ load_dotenv()
 langchain.embeddings.openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def use_embeddings(text: str,question:List[str]):
+def use_embeddings(text: str,questions: List[str]):
     # Splitting up the text into smaller chunks for indexing
     text_splitter = CharacterTextSplitter(        
         separator = "\n",
@@ -29,13 +29,12 @@ def use_embeddings(text: str,question:List[str]):
     docsearch = FAISS.from_texts(texts, embeddings)
     chain = load_qa_chain(OpenAI(temperature=0.8),chain_type="stuff") # stuff all the docs in at once
     #define customized prompt
-    prompt = PromptTemplate(input_variables=['context', 'question'], 
+    prompt = PromptTemplate(input_variables=['context','questions'], 
                             output_parser=None, partial_variables={}, template=template, template_format='f-string', validate_template=True)
     chain.llm_chain.prompt=prompt
     docs=[]
-    for q in question:
-        doc = docsearch.similarity_search(q,k=10)
-        docs.extend(doc)
-    return chain.run(input_documents=docs, question=question)
+    for q in questions:
+        docs.extend(docsearch.similarity_search(q, k=10))
+    return chain.run(input_documents=docs,questions=questions)
 
 
