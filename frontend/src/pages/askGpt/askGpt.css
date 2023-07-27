@@ -64,6 +64,7 @@ input::placeholder {
 }
 #other-questions{
     display: flex;
+    gap: 1px;
 }
 
 #other-questions-input{
