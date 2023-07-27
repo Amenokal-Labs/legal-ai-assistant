@@ -81,7 +81,7 @@ function AskGpt() {
         e.preventDefault()
     }
     const handleStream = ()=>{
-        const evtSource = new EventSource("http://127.0.0.1:8000/stream/askstream");
+        const evtSource = new EventSource('${url}stream/askstream');
         evtSource.addEventListener("new_message", function (event) {
             // Logic to handle status updates
             setResponse(prevResponse => prevResponse + event.data);
